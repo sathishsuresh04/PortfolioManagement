@@ -6,11 +6,11 @@ The lazy coder has been trying to build an API to fetch portfolios, get the tota
 One suspicion is that the currency conversions are at fault but since the lazy developer has moved on to become a gardener no one knows how to identify the problem and potentially fix it; that's where you come in.
 
 ## What To Do
-Maximum time spent should be 2 hours. Since you may not have time to do everything, please briefly explain what you chose to do and why.
+Should take on average about 2 hours to complete. Since you may not have time to do everything, please briefly explain what you chose to do and why.
 
 The code smells. It is filled with bad decisions, incomplete logic and half baked projects. Your job is, to the best of your ability, refactor the code so that it meets the following criteria:
 - An endpoint exists that returns the specified portfolio.
-- An endpoint exists that returns the total amount of all stocks in the portfolio in the specified currency.
+- An endpoint exists that returns the total value of all stocks in the portfolio in the specified currency.
 - An endpoint exists to soft-delete portfolios (whatever that means, we don't know but we don't want to permanently lose the data).
 - Has some unit tests (note: should not be exhaustive).
 - Exchange rates should be fetched from CurrencyLayer and we will give you an API key privately. The documentation is available at https://currencylayer.com/documentation. The account only has permission to get USD exchange rates, so you will need to convert from the base exchange rate to USD and then from USD to the target exchange rate.
