@@ -5,7 +5,6 @@ using System.Net.Http;
 using CodeTest.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
 using System.Text.Json;
 
 namespace CodeTest.Controllers
