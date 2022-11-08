@@ -13,7 +13,7 @@ The code smells. It is filled with bad decisions, incomplete logic and half bake
 - An endpoint exists that returns the total value of all stocks in the portfolio in the specified currency.
 - An endpoint exists to soft-delete portfolios (whatever that means, we don't know but we don't want to permanently lose the data).
 - Has some unit tests (note: should not be exhaustive).
-- Exchange rates should be fetched from CurrencyLayer and we will give you an API key privately. Exchange rates do not need to be fetched for every call, and only need to be refreshed every 24 hours. Documentation is available at https://currencylayer.com/documentation. The account linked to the API key only has permission to get USD exchange rates, so you will need to convert from the base exchange rate to USD and then from USD to the target exchange rate.
+- Exchange rates should be fetched from CurrencyLayer and we will give you an API key privately. Exchange rates do not need to be fetched for every call, and only need to be refreshed every 24 hours. Documentation is available at https://currencylayer.com/documentation. The account linked to the API key only has permission to get USD exchange rates, so you will need to convert from the base currency to USD and then from USD to the target currency.
 
 _NOTE: The project StockService is impeccable and is off limits, you cannot change it whatsoever._
 
