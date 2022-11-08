@@ -69,9 +69,9 @@ namespace CodeTest.Controllers
                         {
                             var stockPrice = stockService.GetCurrentStockPrice(stock.Ticker).Result.Price;
                             var rateUsd = data.quotes["USD" + stock.BaseCurrency];
-                            totalAmount += stockPrice / rateUsd * stock.NumberOfShares;
+                            var amount = stockPrice / rateUsd * stock.NumberOfShares;
                             var targetRateUsd = data.quotes["USD" + currency];
-                            totalAmount *= targetRateUsd;
+                            totalAmount += amount * targetRateUsd;
                         }
                     }
                 }
