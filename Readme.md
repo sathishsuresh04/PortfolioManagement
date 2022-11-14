@@ -6,7 +6,7 @@ The lazy coder has been trying to build an API to fetch portfolios, get the tota
 One suspicion is that the currency conversions are at fault but since the lazy developer has moved on to become a gardener no one knows how to identify the problem and potentially fix it; that's where you come in.
 
 ## What To Do
-Since you may not have time to do everything, please briefly explain what you chose to do and why.
+Since you may not have time to do everything, please briefly explain what you chose to do and why. If you did not have time to add something, please briefly describe in the PR notes what you would have liked to add, and how. 
 
 The code smells. It is filled with bad decisions, incomplete logic and half baked projects. Your job is, to the best of your ability, refactor the code so that it meets the following criteria:
 - An endpoint exists that returns the specified portfolio.
