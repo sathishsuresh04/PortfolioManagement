@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CodeTest.Infrastructure.Models;
+using Mongo2Go;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -9,9 +10,9 @@ namespace CodeTest.Infrastructure.Persistence
     {
         private readonly IMongoCollection<PortfolioData> _portfolioCollection;
 
-        public DataService()
+        public DataService(MongoDbRunner runner)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
+            var client = new MongoClient(runner.ConnectionString);
             _portfolioCollection = client.GetDatabase("portfolioServiceDb").GetCollection<PortfolioData>("Portfolios");
         }
 

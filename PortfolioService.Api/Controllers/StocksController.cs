@@ -6,6 +6,7 @@ using CodeTest.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Text.Json;
+using Mongo2Go;
 
 namespace CodeTest.Controllers
 {
@@ -14,6 +15,7 @@ namespace CodeTest.Controllers
     public class PortfolioController : ControllerBase
     {
         private readonly DataService _dataService;
+        private readonly MongoDbRunner _runner;
 
         private class Quote
         {
@@ -25,9 +27,10 @@ namespace CodeTest.Controllers
             public Dictionary<string, decimal> quotes { get; set; }
         }
 
-        public PortfolioController()
+        public PortfolioController(MongoDbRunner runner)
         {
-            _dataService = new DataService();
+            _runner = runner;
+            _dataService = new DataService(_runner);
         }
 
         [HttpGet("{id}")]
@@ -83,7 +86,7 @@ namespace CodeTest.Controllers
         [HttpGet("/delete")]
         public IActionResult DeletePortfolio(string portfolioId)
         {
-            var dataService = new DataService();
+            var dataService = new DataService(_runner);
             dataService.DeletePortfolio(ObjectId.Parse(portfolioId));
             return Ok();
         }

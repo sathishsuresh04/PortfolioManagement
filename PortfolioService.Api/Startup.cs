@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Mongo2Go;
 
 namespace CodeTest
 {
@@ -18,6 +19,9 @@ namespace CodeTest
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var runner = MongoDbRunner.Start();
+            runner.Import("portfolioServiceDb", "Portfolios", @"..\..\..\..\scripts\portfolios.json", true);
+            services.AddSingleton(runner);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
