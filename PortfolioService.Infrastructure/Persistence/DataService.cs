@@ -9,10 +9,16 @@ namespace CodeTest.Infrastructure.Persistence
     public class DataService
     {
         private readonly IMongoCollection<PortfolioData> _portfolioCollection;
+        private static readonly MongoDbRunner _runner = MongoDbRunner.Start();
 
-        public DataService(MongoDbRunner runner)
+        static DataService()
         {
-            var client = new MongoClient(runner.ConnectionString);
+            _runner.Import("portfolioServiceDb", "Portfolios", @"..\..\..\..\scripts\portfolios.json", true);
+        }
+
+        public DataService()
+        {
+            var client = new MongoClient(_runner.ConnectionString);
             _portfolioCollection = client.GetDatabase("portfolioServiceDb").GetCollection<PortfolioData>("Portfolios");
         }
 
