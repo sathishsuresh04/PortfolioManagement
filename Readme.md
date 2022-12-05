@@ -20,14 +20,7 @@ _NOTE: The project StockService is impeccable and is off limits, you cannot chan
 In addition to the above, we also want you to refactor some of the codebase using best practices. We have no idea what all this means, some consultant just told us. Feel free to use any 3rd party libraries to help you with the task, given they are OSS.
 
 ## Database
-The project uses MongoDB as persistence by default. You are of course free to use another DB but if you do, you will have to explain why, as with any decision made in the code base during a technical interview.
-
-### Database Setup
-If you have not used MongoDB before, you can follow these steps for installation and for seeding the database. We optionally recommend using Robo 3T for viewing the data.
-
-1. Install MongoDB Community Server: https://www.mongodb.com/try/download/community
-1. Install MongoDB Database Tools: https://docs.mongodb.com/database-tools/installation/installation-windows/ (install and add to PATH)
-1. Open a command prompt and browse to /scripts, then run the command `mongoimport --collection=Portfolios --db=portfolioServiceDb portfolios.json` (you should receive confirmation that 2 documents have imported successfully)
+The project uses portable version of MongoDB as persistence by default. You are of course free to use another DB but if you do, you will have to explain why, as with any decision made in the code base during a technical interview.
 
 ## When Finished
 **Please send the code test to us by creating a pull request to the main branch.**
