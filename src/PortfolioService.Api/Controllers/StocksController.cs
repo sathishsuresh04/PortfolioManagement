@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using PortfolioService.Infrastructure.Persistence;
+using PortfolioService.Shared.Data;
 
 namespace PortfolioService.Api.Controllers;
 
@@ -28,7 +28,7 @@ public class PortfolioController : ControllerBase
     {
         var portfolio = _dataService.GetPortfolio(ObjectId.Parse(portfolioId)).Result;
         var totalAmount = 0m;
-        var stockService = new StockService.StockService();
+        var stockService = new StockService();
         var apiAccessKey = "edcbcd5977de259ca7fb25077ca8a0f6";
         using (var httpClient = new HttpClient {BaseAddress = new Uri("http://api.currencylayer.com/"),})
         {

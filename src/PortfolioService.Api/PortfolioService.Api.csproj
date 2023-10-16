@@ -1,11 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore"/>
+    <ProjectReference Include="..\PortfolioService\PortfolioService.csproj"/>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PortfolioService.Infrastructure\PortfolioService.Infrastructure.csproj"/>
-    <ProjectReference Include="..\StockService\StockService.csproj"/>
-  </ItemGroup>
-
 </Project>
