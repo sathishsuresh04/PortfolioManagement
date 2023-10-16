@@ -1,6 +1,5 @@
 using BuildingBlocks.Swagger;
 using Microsoft.AspNetCore.Builder;
-using Serilog;
 
 namespace PortfolioService.Shared.Extensions;
 

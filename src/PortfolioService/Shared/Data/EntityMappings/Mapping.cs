@@ -1,7 +1,6 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using PortfolioService.Portfolios.Models;
-using PortfolioService.Shared.Core.Abstractions;
 using PortfolioService.Shared.Core.Primitives;
 
 namespace PortfolioService.Shared.Data.EntityMappings;
@@ -10,14 +9,6 @@ public static class Mapping
 {
     public static void Configure()
     {
-        BsonClassMap.RegisterClassMap<AggregateRoot>(
-            map =>
-            {
-                map.AutoMap();
-                map.SetIgnoreExtraElements(true);
-                map.MapIdMember(x => x.Id).SetElementName(Constants.ElementsNames.Id);
-                map.SetIsRootClass(true);
-            });
         BsonClassMap.RegisterClassMap<Entity>(
             map =>
             {
@@ -25,23 +16,14 @@ public static class Mapping
                 map.SetIgnoreExtraElements(true);
                 map.MapIdMember(x => x.Id).SetElementName(Constants.ElementsNames.Id);
             });
+        BsonClassMap.RegisterClassMap<AggregateRoot>(
+            map =>
+            {
+                map.AutoMap();
+                map.SetIgnoreExtraElements(true);
+                map.SetIsRootClass(true);
+            });
 
-        BsonClassMap.RegisterClassMap<IAuditableEntity>(
-            map =>
-            {
-                map.AutoMap();
-                map.SetIgnoreExtraElements(true);
-                map.MapMember(x => x.CreatedOnUtc).SetElementName(Constants.ElementsNames.CreatedOnUtc);
-                map.MapMember(x => x.ModifiedOnUtc).SetElementName(Constants.ElementsNames.ModifiedOnUtc);
-            });
-        BsonClassMap.RegisterClassMap<ISoftDeletableEntity>(
-            map =>
-            {
-                map.AutoMap();
-                map.SetIgnoreExtraElements(true);
-                map.MapMember(x => x.DeletedOnUtc).SetElementName(Constants.ElementsNames.DeletedOnUtc);
-                map.MapMember(x => x.Deleted).SetElementName(Constants.ElementsNames.Deleted);
-            });
 
         BsonClassMap.RegisterClassMap<Portfolio>(
             map =>
@@ -50,6 +32,14 @@ public static class Mapping
                 map.SetIgnoreExtraElements(true);
                 map.MapMember(x => x.CurrentTotalValue).SetElementName(Constants.ElementsNames.CurrentTotalValue);
                 map.MapMember(x => x.Stocks).SetElementName(Constants.ElementsNames.Stocks);
+
+                // IAuditableEntity
+                map.MapMember(x => x.CreatedOnUtc).SetElementName(Constants.ElementsNames.CreatedOnUtc);
+                map.MapMember(x => x.ModifiedOnUtc).SetElementName(Constants.ElementsNames.ModifiedOnUtc);
+
+                // ISoftDeletableEntity
+                map.MapMember(x => x.DeletedOnUtc).SetElementName(Constants.ElementsNames.DeletedOnUtc);
+                map.MapMember(x => x.Deleted).SetElementName(Constants.ElementsNames.Deleted);
             });
         BsonClassMap.RegisterClassMap<Stock>(
             map =>

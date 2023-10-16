@@ -2,27 +2,6 @@ using Ardalis.GuardClauses;
 
 namespace PortfolioService.Shared.Core.Primitives;
 
-// public abstract class Entity: IEquatable<Entity>
-// {
-//
-//     /// <summary>
-//     /// Initializes a new instance of the <see cref="Entity"/> class.
-//     /// </summary>
-//     /// <param name="id">The entity identifier.</param>
-//     protected Entity(Guid id)
-//         : this()
-//     {
-//         ArgumentNullException.ThrowIfNullOrEmpty(id,nameof(id));
-//     //    Ensure.NotEmpty(id, "The identifier is required.", nameof(id));
-//
-//         Id = id;
-//     }
-//
-//
-//     public  string Id {  get; protected set; }
-//     public DateTime CreatedAt => DateTime.Now;
-// }
-
 public abstract class Entity : IEquatable<Entity>
 {
     /// <summary>
