@@ -20,9 +20,9 @@ public static class PortfolioConfigs
         return builder;
     }
 
-    public static WebApplication UsePortfolioServices(this WebApplication app)
+    public static async Task<WebApplication> UsePortfolioServices(this WebApplication app)
     {
-         app.UseInfrastructure();
+        await app.UseInfrastructure();
         return app;
     }
     public static IEndpointRouteBuilder MapPortfolioEndpoints(this IEndpointRouteBuilder endpoints)

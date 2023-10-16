@@ -1,6 +1,9 @@
 using System.Threading.RateLimiting;
+using BuildingBlocks.Abstractions.Persistence;
+using BuildingBlocks.Abstractions.Serialization;
 using BuildingBlocks.Configurations;
 using BuildingBlocks.Core.Mapster;
+using BuildingBlocks.Core.Serialization;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Swagger;
 using BuildingBlocks.Validator;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using PortfolioService.Portfolios.Data;
 using PortfolioService.Portfolios.Data.Abstractions;
+using PortfolioService.Portfolios.Data.Seed;
 using PortfolioService.Shared.Abstractions;
 using PortfolioService.Shared.Data;
 using PortfolioService.Shared.Data.Abstractions;
@@ -33,6 +37,7 @@ public static class AddInfrastructureExtensions
         var openApiModel = builder.Configuration.GetOptions<OpenApiInfo>(nameof(OpenApiInfo));
         builder.Services
             .Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true)
+            .AddTransient<ISerializer, DefaultSerializer>()
             .AddCustomMediatR()
             .AddProblemDetails()
             .AddRateLimiter(
@@ -73,8 +78,10 @@ public static class AddInfrastructureExtensions
     {
         services
             .AddScoped<IPortfolioContext, PortfolioContext>()
+
             .AddScoped(typeof(IRepository<>), typeof(BaseRepository<>))
-            .AddScoped<IPortfolioRepository, PortfolioRepository>();
+            .AddScoped<IPortfolioRepository, PortfolioRepository>()
+            .AddScoped<IDataSeeder, PortfolioDataSeeder>();
         Mapping.Configure();
         return services;
     }

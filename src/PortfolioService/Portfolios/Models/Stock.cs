@@ -2,9 +2,9 @@ namespace PortfolioService.Portfolios.Models;
 
 public class Stock
 {
-    public string Ticker { get; private set; } = default!;
-    public string BaseCurrency { get; private set; } = default!;
-    public int NumberOfShares { get; private set; }
+    public string Ticker { get;  set; } = default!;
+    public string BaseCurrency { get;  set; } = default!;
+    public int NumberOfShares { get;  set; }
 
     /// <summary>
     ///     Create new stock

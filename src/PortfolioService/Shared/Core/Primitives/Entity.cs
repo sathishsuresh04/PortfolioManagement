@@ -1,36 +1,21 @@
-using Ardalis.GuardClauses;
+using MongoDB.Bson;
 
 namespace PortfolioService.Shared.Core.Primitives;
 
 public abstract class Entity : IEquatable<Entity>
 {
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="Entity" /> class.
-    /// </summary>
-    /// <param name="id">The entity identifier.</param>
-    protected Entity(string id)
+    protected Entity(ObjectId id)
         : this()
     {
-        Guard.Against.Null(id);
         Id = id;
     }
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="Entity" /> class.
-    /// </summary>
-    /// <remarks>
-    ///     Required by EF Core.
-    /// </remarks>
     protected Entity()
     {
     }
 
-    /// <summary>
-    ///     Gets or sets the entity identifier.
-    /// </summary>
-    public string Id { get; }
+    public ObjectId Id { get; private set; }
 
-    /// <inheritdoc />
     public bool Equals(Entity other)
     {
         if (other is null) return false;
@@ -52,7 +37,6 @@ public abstract class Entity : IEquatable<Entity>
         return !(a == b);
     }
 
-    /// <inheritdoc />
     public override bool Equals(object obj)
     {
         if (obj is null) return false;
@@ -63,12 +47,11 @@ public abstract class Entity : IEquatable<Entity>
 
         if (!(obj is Entity other)) return false;
 
-        if (Id == string.Empty || other.Id == string.Empty) return false;
+        if (Id == ObjectId.Empty || other.Id == ObjectId.Empty) return false;
 
         return Id == other.Id;
     }
 
-    /// <inheritdoc />
     public override int GetHashCode()
     {
         return Id.GetHashCode() * 41;

@@ -39,6 +39,9 @@ internal sealed class DeletePortfolioByIdHandler : ICommandHandler<DeletePortfol
         var portfolio = await _portfolioRepository.GetByIdAsync(PortfolioId.Of(request.Id));
         Guard.Against.NotFound(portfolio, new PortfolioNotFoundException(request.Id));
 
-        _portfolioRepository.Remove(PortfolioId.Of(request.Id));
+        portfolio.SetSoftDelete(DateTime.UtcNow);
+        _portfolioRepository.Update(portfolio);
+       // _portfolioRepository.Remove(PortfolioId.Of(request.Id));
+      await  _portfolioRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

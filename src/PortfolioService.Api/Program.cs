@@ -35,7 +35,7 @@ internal static class Program
                 });
             builder.AddPortfolioServices();
             var app = builder.Build();
-            app.UsePortfolioServices();
+           await app.UsePortfolioServices();
             app.MapPortfolioEndpoints();
             await app.RunAsync();
 

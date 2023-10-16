@@ -24,7 +24,15 @@ public static class Mapping
                 map.SetIsRootClass(true);
             });
 
-
+        BsonClassMap.RegisterClassMap<Stock>(
+            map =>
+            {
+             //   map.AutoMap();
+                map.SetIgnoreExtraElements(true);
+                map.MapMember(x => x.Ticker).SetElementName(Constants.ElementsNames.Ticker);
+                map.MapMember(x => x.BaseCurrency).SetElementName(Constants.ElementsNames.BaseCurrency);
+                map.MapMember(x => x.NumberOfShares).SetElementName(Constants.ElementsNames.NumberOfShares);
+            });
         BsonClassMap.RegisterClassMap<Portfolio>(
             map =>
             {
@@ -41,15 +49,7 @@ public static class Mapping
                 map.MapMember(x => x.DeletedOnUtc).SetElementName(Constants.ElementsNames.DeletedOnUtc);
                 map.MapMember(x => x.Deleted).SetElementName(Constants.ElementsNames.Deleted);
             });
-        BsonClassMap.RegisterClassMap<Stock>(
-            map =>
-            {
-                map.AutoMap();
-                map.SetIgnoreExtraElements(true);
-                map.MapMember(x => x.Ticker).SetElementName(Constants.ElementsNames.Ticker);
-                map.MapMember(x => x.BaseCurrency).SetElementName(Constants.ElementsNames.BaseCurrency);
-                map.MapMember(x => x.NumberOfShares).SetElementName(Constants.ElementsNames.NumberOfShares);
-            });
+
         // Conventions
         var pack = new ConventionPack
                    {

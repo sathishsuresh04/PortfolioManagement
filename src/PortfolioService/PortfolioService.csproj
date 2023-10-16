@@ -8,7 +8,4 @@
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.csproj"/>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Shared\Data\Seedings\"/>
-  </ItemGroup>
 </Project>
