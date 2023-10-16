@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace CodeTest.Infrastructure.Models
+namespace PortfolioService.Infrastructure.Models
 {
     public class PortfolioData
     {

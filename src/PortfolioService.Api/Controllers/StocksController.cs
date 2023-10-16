@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using CodeTest.Infrastructure.Persistence;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using System.Text.Json;
+using PortfolioService.Infrastructure.Persistence;
 
-namespace CodeTest.Controllers
+namespace PortfolioService.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

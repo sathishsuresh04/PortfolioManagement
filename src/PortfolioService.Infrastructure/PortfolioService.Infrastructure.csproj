@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+
+  <ItemGroup>
+    <PackageReference Include="Mongo2Go"/>
+    <PackageReference Include="MongoDB.Driver" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+  
+
+  <ItemGroup>
+    <Folder Include="Context\" />
+    <Folder Include="EntityMappings\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
+</Project>

@@ -23,7 +23,6 @@ mono_crash.*
 [Rr]eleases/
 x64/
 x86/
-[Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
@@ -61,9 +60,6 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-
-# ASP.NET Scaffolding
-ScaffoldingReadMe.txt
 
 # StyleCop
 StyleCopReport.xml
@@ -141,9 +137,6 @@ _TeamCity*
 .axoCover/*
 !.axoCover/settings.json
 
-# Coverlet is a free, cross platform Code Coverage Tool
-coverage*[.json, .xml, .info]
-
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
@@ -193,7 +186,7 @@ PublishScripts/
 *.nupkg
 # NuGet Symbol Packages
 *.snupkg
-# The packages folder can be ignored because of Package Restore
+# The packages folder can be ignored because of Package Reecommerce
 **/[Pp]ackages/*
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
@@ -211,10 +204,10 @@ csx/
 ecf/
 rcf/
 
-# Windows Store app package directories and files
+# Windows ECommerce app package directories and files
 AppPackages/
 BundleArtifacts/
-Package.StoreAssociation.xml
+Package.ECommerceAssociation.xml
 _pkginfo.txt
 *.appx
 *.appxbundle
@@ -355,3 +348,34 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+.tye/
+.logs/
+.Log
+
+out/
+**/.vagrant/
+.idea/
+local/data/
+portainer-data/
+docker.sock/
+localtime/
+coveragereport/
+CoverageResults/
+coverage.cobertura.xml
+coverage.info
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Local terraform files
+azure.conf
+.terraform/
+.terraform.lock.hcl
+
+# Local docker test
+Docker/web-api/drop/
+vista/

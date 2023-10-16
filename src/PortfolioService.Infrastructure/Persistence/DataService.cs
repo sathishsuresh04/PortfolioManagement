@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CodeTest.Infrastructure.Models;
 using Mongo2Go;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using PortfolioService.Infrastructure.Models;
 
-namespace CodeTest.Infrastructure.Persistence
+namespace PortfolioService.Infrastructure.Persistence
 {
     public class DataService
     {
