@@ -1,37 +1,35 @@
-﻿using System.Threading.Tasks;
-using Mongo2Go;
+﻿using Mongo2Go;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using PortfolioService.Infrastructure.Models;
 
-namespace PortfolioService.Infrastructure.Persistence
+namespace PortfolioService.Infrastructure.Persistence;
+
+public class DataService
 {
-    public class DataService
+    private static readonly MongoDbRunner _runner = MongoDbRunner.Start();
+    private readonly IMongoCollection<PortfolioData> _portfolioCollection;
+
+    static DataService()
     {
-        private readonly IMongoCollection<PortfolioData> _portfolioCollection;
-        private static readonly MongoDbRunner _runner = MongoDbRunner.Start();
+        _runner.Import("portfolioServiceDb", "Portfolios", @"..\..\..\..\scripts\portfolios.json", true);
+    }
 
-        static DataService()
-        {
-            _runner.Import("portfolioServiceDb", "Portfolios", @"..\..\..\..\scripts\portfolios.json", true);
-        }
+    public DataService()
+    {
+        var client = new MongoClient(_runner.ConnectionString);
+        _portfolioCollection = client.GetDatabase("portfolioServiceDb").GetCollection<PortfolioData>("Portfolios");
+    }
 
-        public DataService()
-        {
-            var client = new MongoClient(_runner.ConnectionString);
-            _portfolioCollection = client.GetDatabase("portfolioServiceDb").GetCollection<PortfolioData>("Portfolios");
-        }
+    public async Task<PortfolioData> GetPortfolio(ObjectId id)
+    {
+        var idFilter = Builders<PortfolioData>.Filter.Eq(portfolio => portfolio.Id, id);
 
-        public async Task<PortfolioData> GetPortfolio(ObjectId id)
-        {
-            var idFilter = Builders<PortfolioData>.Filter.Eq(portfolio => portfolio.Id, id);
+        return await _portfolioCollection.Find(idFilter).FirstOrDefaultAsync();
+    }
 
-            return await _portfolioCollection.Find(idFilter).FirstOrDefaultAsync();
-        }
-
-        public async Task DeletePortfolio(ObjectId id)
-        {
-            await _portfolioCollection.DeleteOneAsync(Builders<PortfolioData>.Filter.Eq(portfolio => portfolio.Id, id));
-        }
+    public async Task DeletePortfolio(ObjectId id)
+    {
+        await _portfolioCollection.DeleteOneAsync(Builders<PortfolioData>.Filter.Eq(portfolio => portfolio.Id, id));
     }
 }

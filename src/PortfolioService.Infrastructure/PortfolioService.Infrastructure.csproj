@@ -1,18 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  
+
 
   <ItemGroup>
     <PackageReference Include="Mongo2Go"/>
-    <PackageReference Include="MongoDB.Driver" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="MongoDB.Driver"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
   </ItemGroup>
-  
+
 
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="EntityMappings\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Repository\" />
+    <ProjectReference Include="..\PortfolioService.Core\PortfolioService.Core.csproj"/>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Persistence\Seedings\"/>
   </ItemGroup>
 
 </Project>

@@ -4,8 +4,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PortfolioService.Infrastructure\PortfolioService.Infrastructure.csproj" />
-    <ProjectReference Include="..\StockService\StockService.csproj" />
+    <ProjectReference Include="..\PortfolioService.Infrastructure\PortfolioService.Infrastructure.csproj"/>
+    <ProjectReference Include="..\StockService\StockService.csproj"/>
   </ItemGroup>
 
 </Project>
