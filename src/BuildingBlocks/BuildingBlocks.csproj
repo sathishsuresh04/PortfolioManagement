@@ -41,7 +41,6 @@
     <PackageReference Include="Serilog.Sinks.OpenTelemetry"/>
     <PackageReference Include="Serilog.OpenTelemetry.ConsoleSink"/>
     <PackageReference Include="Humanizer"/>
-    <PackageReference Include="Mapster"/>
     <PackageReference Include="Bogus"/>
     <PackageReference Include="EasyCaching.Serialization.MessagePack"/>
     <PackageReference Include="EasyCaching.Serialization.Json"/>
