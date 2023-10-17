@@ -43,5 +43,10 @@
     <PackageReference Include="Humanizer"/>
     <PackageReference Include="Mapster"/>
     <PackageReference Include="Bogus"/>
+    <PackageReference Include="EasyCaching.Serialization.MessagePack" />
+    <PackageReference Include="EasyCaching.Serialization.Json" />
+    <PackageReference Include="EasyCaching.Redis" />
+    <PackageReference Include="EasyCaching.InMemory" />
+    <PackageReference Include="EasyCaching.Core" />
   </ItemGroup>
 </Project>

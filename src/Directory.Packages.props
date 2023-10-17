@@ -82,4 +82,11 @@
     <PackageVersion Include="Bogus" Version="34.0.2" />
     <PackageVersion Include="AutoBogus" Version="2.13.1" />
   </ItemGroup>
+  <ItemGroup Label="Caching">
+    <PackageVersion Include="EasyCaching.Serialization.MessagePack" Version="1.9.1" />
+    <PackageVersion Include="EasyCaching.Serialization.Json" Version="1.9.1" />
+    <PackageVersion Include="EasyCaching.Redis" Version="1.9.1" />
+    <PackageVersion Include="EasyCaching.InMemory" Version="1.9.1" />
+    <PackageVersion Include="EasyCaching.Core" Version="1.9.1" />
+  </ItemGroup>
 </Project>

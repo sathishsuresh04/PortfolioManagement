@@ -1,6 +1,7 @@
 using System.Threading.RateLimiting;
 using BuildingBlocks.Abstractions.Persistence;
 using BuildingBlocks.Abstractions.Serialization;
+using BuildingBlocks.Caching;
 using BuildingBlocks.Configurations;
 using BuildingBlocks.Core.Mapster;
 using BuildingBlocks.Core.Serialization;
@@ -72,7 +73,10 @@ public static class AddInfrastructureExtensions
                 });
 
         //now it is singleton since not maintaining any states , but in future it can be Transient or scoped
-        builder.Services.AddSingleton<IStockService, StockService>();
+        builder.Services
+            .AddSingleton<IStockService, StockService>()
+            .AddTransient<ExchangeRateService>()
+            .AddCustomCaching(builder.Configuration);
         TypeAdapterConfig.GlobalSettings.RequireDestinationMemberSource = true;
         return builder;
     }
