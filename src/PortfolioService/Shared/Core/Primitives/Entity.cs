@@ -14,7 +14,7 @@ public abstract class Entity : IEquatable<Entity>
     {
     }
 
-    public ObjectId Id { get; }
+    public ObjectId Id { get; set; }
 
     public bool Equals(Entity other)
     {

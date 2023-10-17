@@ -1,4 +1,4 @@
-namespace PortfolioService.Shared.Abstractions;
+namespace PortfolioService.Shared.Data.Abstractions;
 
 public interface IStockService
 {

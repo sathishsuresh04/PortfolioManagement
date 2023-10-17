@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using PortfolioService.Portfolios.Exceptions;
 
-namespace PortfolioService.Portfolios.Models.ValueObjects;
+namespace PortfolioService.Portfolios.ValueObjects;
 
 public record PortfolioId
 {

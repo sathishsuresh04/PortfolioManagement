@@ -6,7 +6,7 @@ using FluentValidation;
 using MapsterMapper;
 using PortfolioService.Portfolios.Data.Abstractions;
 using PortfolioService.Portfolios.Exceptions;
-using PortfolioService.Portfolios.Models.ValueObjects;
+using PortfolioService.Portfolios.ValueObjects;
 
 namespace PortfolioService.Portfolios.Features.DeletePortfolioById;
 

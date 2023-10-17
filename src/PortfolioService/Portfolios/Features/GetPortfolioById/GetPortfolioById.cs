@@ -7,7 +7,7 @@ using MapsterMapper;
 using PortfolioService.Portfolios.Data.Abstractions;
 using PortfolioService.Portfolios.Dtos;
 using PortfolioService.Portfolios.Exceptions;
-using PortfolioService.Portfolios.Models.ValueObjects;
+using PortfolioService.Portfolios.ValueObjects;
 
 namespace PortfolioService.Portfolios.Features.GetPortfolioById;
 
@@ -23,7 +23,7 @@ public record GetPortfolioById(string Id) : IQuery<PortfolioDto>
     }
 }
 
-internal sealed class GetPortfolioByIdHandler : IQueryHandler<GetPortfolioById, PortfolioDto>
+public sealed class GetPortfolioByIdHandler : IQueryHandler<GetPortfolioById, PortfolioDto>
 {
     private readonly IMapper _mapper;
     private readonly IPortfolioRepository _portfolioRepository;
@@ -37,6 +37,7 @@ internal sealed class GetPortfolioByIdHandler : IQueryHandler<GetPortfolioById, 
     public async Task<PortfolioDto> Handle(GetPortfolioById request, CancellationToken cancellationToken)
     {
         Guard.Against.Null(request);
+        Guard.Against.Null(request.Id);
         var portfolio = await _portfolioRepository.GetByIdAsync(PortfolioId.Of(request.Id));
         Guard.Against.NotFound(portfolio, new PortfolioNotFoundException(request.Id));
         var portfolioDto = _mapper.Map<PortfolioDto>(portfolio);

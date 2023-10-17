@@ -6,14 +6,14 @@ using PortfolioService.Shared.Dtos;
 using PortfolioService.Shared.Options;
 using Refit;
 
-namespace PortfolioService.Shared.Infrastructure;
+namespace PortfolioService.Shared.Data.Services;
 
 public class ExchangeRateService
 {
     private const int CacheHours = 24;
+    private const string CacheKey = "exchange_rate_data";
     private readonly IEasyCachingProvider _cachingProvider;
     private readonly IExchangeRateApiClient _exchangeRateApiClient;
-    private const string CacheKey = "exchange_rate_data";
     private readonly ExchangeRateApiOptions _exchangeRateApiOptions;
 
     public ExchangeRateService(
@@ -29,11 +29,8 @@ public class ExchangeRateService
 
     public async Task<Quote> GetExchangeRateAsync(CancellationToken cancellationToken)
     {
-        var cacheValue = await _cachingProvider.GetAsync<Quote>(CacheKey,cancellationToken);
-        if (cacheValue.HasValue)
-        {
-            return cacheValue.Value;
-        }
+        var cacheValue = await _cachingProvider.GetAsync<Quote>(CacheKey, cancellationToken);
+        if (cacheValue.HasValue) return cacheValue.Value;
 
         try
         {
@@ -49,8 +46,12 @@ public class ExchangeRateService
         catch (ApiException ex)
         {
             throw new HttpRequestException(
-                $"Error occurred while retrieving exchange rate data. Status Code: {ex.StatusCode}. Reason:{ex.Content}", ex);
+                $"Error occurred while retrieving exchange rate data. Status Code: {
+                    ex.StatusCode
+                }. Reason:{
+                    ex.Content
+                }",
+                ex);
         }
-
     }
 }

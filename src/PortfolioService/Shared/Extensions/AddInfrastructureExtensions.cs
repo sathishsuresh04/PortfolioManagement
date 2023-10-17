@@ -19,12 +19,11 @@ using Microsoft.OpenApi.Models;
 using PortfolioService.Portfolios.Data;
 using PortfolioService.Portfolios.Data.Abstractions;
 using PortfolioService.Portfolios.Data.Seed;
-using PortfolioService.Shared.Abstractions;
 using PortfolioService.Shared.Data;
 using PortfolioService.Shared.Data.Abstractions;
 using PortfolioService.Shared.Data.EntityMappings;
 using PortfolioService.Shared.Data.Repositories;
-using PortfolioService.Shared.Infrastructure;
+using PortfolioService.Shared.Data.Services;
 using PortfolioService.Shared.Options;
 using Refit;
 

@@ -34,6 +34,7 @@ public class CacheOptions
     /// </summary>
     public string DefaultCachePrefix { get; set; } = "Ch_";
 }
+
 /// <summary>
 ///     Options for Redis cache configuration.
 /// </summary>

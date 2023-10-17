@@ -38,9 +38,9 @@ public static class Extensions
                         config =>
                         {
                             config.DBConfig = new RedisDBOptions
-                            {
-                                Configuration = cacheOptions.RedisCacheOptions.ConnectionString,
-                            };
+                                              {
+                                                  Configuration = cacheOptions.RedisCacheOptions.ConnectionString,
+                                              };
                             config.SerializerName = cacheOptions.SerializationType;
                         },
                         nameof(CacheProviderType.Redis));
@@ -65,5 +65,4 @@ public static class Extensions
 
         return services;
     }
-
 }

@@ -1,6 +1,6 @@
-using PortfolioService.Shared.Abstractions;
+using PortfolioService.Shared.Data.Abstractions;
 
-namespace PortfolioService.Shared.Infrastructure;
+namespace PortfolioService.Shared.Data.Services;
 
 public class StockService : IStockService
 {
