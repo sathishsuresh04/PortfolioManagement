@@ -26,7 +26,7 @@ public record GetTotalPortfolioValue(string Id, string Currency = "USD") : IQuer
 
 public record GetTotalPortfolioValueResponse(decimal TotalValue);
 
-internal sealed class
+public sealed class
     GetTotalPortfolioValueHandler : IQueryHandler<GetTotalPortfolioValue, GetTotalPortfolioValueResponse>
 {
     private readonly ExchangeRateService _exchangeRateService;
@@ -51,6 +51,7 @@ internal sealed class
     )
     {
         Guard.Against.Null(request);
+        Guard.Against.Null(request.Id);
         var portfolio = await _portfolioRepository.GetByIdAsync(PortfolioId.Of(request.Id));
         Guard.Against.NotFound(portfolio, new PortfolioNotFoundException(request.Id));
 

@@ -16,6 +16,7 @@ public class ExchangeRateService
     private readonly IExchangeRateApiClient _exchangeRateApiClient;
     private readonly ExchangeRateApiOptions _exchangeRateApiOptions;
 
+
     public ExchangeRateService(
         IEasyCachingProviderFactory cachingProviderFactory,
         IExchangeRateApiClient exchangeRateApiClient,
@@ -30,7 +31,7 @@ public class ExchangeRateService
     public async Task<Quote> GetExchangeRateAsync(CancellationToken cancellationToken)
     {
         var cacheValue = await _cachingProvider.GetAsync<Quote>(CacheKey, cancellationToken);
-        if (cacheValue.HasValue) return cacheValue.Value;
+        if (cacheValue?.HasValue == true) return cacheValue.Value;
 
         try
         {

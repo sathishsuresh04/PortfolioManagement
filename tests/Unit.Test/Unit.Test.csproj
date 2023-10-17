@@ -27,8 +27,4 @@
       <ProjectReference Include="..\..\src\PortfolioService\PortfolioService.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Fakes\" />
-    </ItemGroup>
-
 </Project>
