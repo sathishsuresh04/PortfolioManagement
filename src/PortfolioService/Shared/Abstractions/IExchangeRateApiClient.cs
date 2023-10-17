@@ -1,5 +1,6 @@
 using PortfolioService.Shared.Dtos;
 using Refit;
+
 namespace PortfolioService.Shared.Abstractions;
 
 public interface IExchangeRateApiClient

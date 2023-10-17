@@ -6,10 +6,8 @@ using Spectre.Console;
 
 namespace PortfolioService.Api;
 
-
 internal static class Program
 {
-
     public static async Task Main(string[] args)
     {
         AnsiConsole.Write(
@@ -35,11 +33,9 @@ internal static class Program
                 });
             builder.AddPortfolioServices();
             var app = builder.Build();
-           await app.UsePortfolioServices();
+            await app.UsePortfolioServices();
             app.MapPortfolioEndpoints();
             await app.RunAsync();
-
-
         }
         catch (Exception e) when (e is not OperationCanceledException && e.GetType().Name != "HostAbortedException")
         {
@@ -52,4 +48,3 @@ internal static class Program
         }
     }
 }
-

@@ -27,7 +27,7 @@ public static class Mapping
         BsonClassMap.RegisterClassMap<Stock>(
             map =>
             {
-             //   map.AutoMap();
+                map.AutoMap();
                 map.SetIgnoreExtraElements(true);
                 map.MapMember(x => x.Ticker).SetElementName(Constants.ElementsNames.Ticker);
                 map.MapMember(x => x.BaseCurrency).SetElementName(Constants.ElementsNames.BaseCurrency);

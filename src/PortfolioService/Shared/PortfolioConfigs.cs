@@ -14,6 +14,7 @@ public static class PortfolioConfigs
     private const string PortfoliosTag = "Portfolios";
     private const string Portfolios = "portfolios";
     private static string PortfolioPrefixUri => $"{EndpointConfig.BaseApiPath}/{Portfolios}";
+
     public static WebApplicationBuilder AddPortfolioServices(this WebApplicationBuilder builder)
     {
         builder.AddInfrastructure();
@@ -25,12 +26,14 @@ public static class PortfolioConfigs
         await app.UseInfrastructure();
         return app;
     }
+
     public static IEndpointRouteBuilder MapPortfolioEndpoints(this IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/", () => "Portfolio Service").ExcludeFromDescription();
         endpoints.MapPortfolioModuleEndpoints();
         return endpoints;
     }
+
     private static IEndpointRouteBuilder MapPortfolioModuleEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var portfoliosV1 = endpoints.NewVersionedApi(PortfoliosTag)

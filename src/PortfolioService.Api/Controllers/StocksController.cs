@@ -84,3 +84,5 @@
 //         public Dictionary<string, decimal> quotes { get; set; }
 //     }
 // }
+
+

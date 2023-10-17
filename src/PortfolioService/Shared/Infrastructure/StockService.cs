@@ -1,9 +1,6 @@
-﻿namespace PortfolioService.Shared.Data;
+using PortfolioService.Shared.Abstractions;
 
-public interface IStockService
-{
-    Task<(decimal Price, string BaseCurrency)> GetCurrentStockPrice(string ticker);
-}
+namespace PortfolioService.Shared.Infrastructure;
 
 public class StockService : IStockService
 {

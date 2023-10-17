@@ -1,14 +1,14 @@
-using System.Text.Json;
 using Ardalis.GuardClauses;
 using BuildingBlocks.Abstractions.CQRS;
 using BuildingBlocks.Core.Exceptions;
 using BuildingBlocks.Validator;
 using FluentValidation;
+using Microsoft.Extensions.Options;
 using PortfolioService.Portfolios.Data.Abstractions;
 using PortfolioService.Portfolios.Exceptions;
 using PortfolioService.Portfolios.Models.ValueObjects;
-using PortfolioService.Shared.Data;
-using PortfolioService.Shared.Dtos;
+using PortfolioService.Shared.Abstractions;
+using PortfolioService.Shared.Options;
 
 namespace PortfolioService.Portfolios.Features.GetTotalPortfolioValue;
 
@@ -29,11 +29,22 @@ public record GetTotalPortfolioValueResponse(decimal TotalValue);
 internal sealed class
     GetTotalPortfolioValueHandler : IQueryHandler<GetTotalPortfolioValue, GetTotalPortfolioValueResponse>
 {
+    private readonly IExchangeRateApiClient _exchangeRateApiClient;
+    private readonly ExchangeRateApiOptions _exchangeRateApiOptions;
     private readonly IPortfolioRepository _portfolioRepository;
+    private readonly IStockService _stockService;
 
-    public GetTotalPortfolioValueHandler(IPortfolioRepository portfolioRepository)
+    public GetTotalPortfolioValueHandler(
+        IPortfolioRepository portfolioRepository,
+        IExchangeRateApiClient exchangeRateApiClient,
+        IStockService stockService,
+        IOptions<ExchangeRateApiOptions> options
+    )
     {
         _portfolioRepository = portfolioRepository;
+        _exchangeRateApiClient = exchangeRateApiClient;
+        _stockService = stockService;
+        _exchangeRateApiOptions = options.Value;
     }
 
     public async Task<GetTotalPortfolioValueResponse> Handle(
@@ -46,45 +57,35 @@ internal sealed class
         Guard.Against.NotFound(portfolio, new PortfolioNotFoundException(request.Id));
 
         var totalAmount = 0m;
-        var stockService = new StockService();
-        var apiAccessKey = "edcbcd5977de259ca7fb25077ca8a0f6";
-        using (var httpClient = new HttpClient {BaseAddress = new Uri("http://api.currencylayer.com/"),})
-        {
-            // See https://currencylayer.com/documentation for details about the api
-            var foo = await httpClient.GetAsync($"live?access_key={apiAccessKey}", cancellationToken);
-            var data = await JsonSerializer.DeserializeAsync<Quote>(
-                           await foo.Content.ReadAsStreamAsync(cancellationToken),
-                           cancellationToken: cancellationToken);
 
-            foreach (var stock in portfolio.Stocks)
+        var data = await _exchangeRateApiClient.GetExchangeRateAsync(_exchangeRateApiOptions.Token);
+        foreach (var stock in portfolio.Stocks)
+        {
+            if (stock.BaseCurrency == request.Currency)
             {
-                if (stock.BaseCurrency == request.Currency)
+                totalAmount += (await _stockService.GetCurrentStockPrice(stock.Ticker)).Price *
+                               stock.NumberOfShares;
+            }
+            else
+            {
+                if (request.Currency == "USD")
                 {
-                    totalAmount += (await stockService.GetCurrentStockPrice(stock.Ticker)).Price *
-                                   stock.NumberOfShares;
+                    var stockPrice = (await _stockService.GetCurrentStockPrice(stock.Ticker)).Price;
+                    if (data == null) continue;
+                    var rateUsd = data.quotes["USD" + stock.BaseCurrency];
+                    totalAmount += stockPrice / rateUsd * stock.NumberOfShares;
                 }
                 else
                 {
-                    if (request.Currency == "USD")
-                    {
-                        var stockPrice = (await stockService.GetCurrentStockPrice(stock.Ticker)).Price;
-                        if (data == null) continue;
-                        var rateUsd = data.quotes["USD" + stock.BaseCurrency];
-                        totalAmount += stockPrice / rateUsd * stock.NumberOfShares;
-                    }
-                    else
-                    {
-                        var stockPrice = (await stockService.GetCurrentStockPrice(stock.Ticker)).Price;
-                        if (data == null) continue;
-                        var rateUsd = data.quotes["USD" + stock.BaseCurrency];
-                        var amount = stockPrice / rateUsd * stock.NumberOfShares;
-                        var targetRateUsd = data.quotes["USD" + request.Currency];
-                        totalAmount += amount * targetRateUsd;
-                    }
+                    var stockPrice = (await _stockService.GetCurrentStockPrice(stock.Ticker)).Price;
+                    if (data == null) continue;
+                    var rateUsd = data.quotes["USD" + stock.BaseCurrency];
+                    var amount = stockPrice / rateUsd * stock.NumberOfShares;
+                    var targetRateUsd = data.quotes["USD" + request.Currency];
+                    totalAmount += amount * targetRateUsd;
                 }
             }
         }
-
 
         return new GetTotalPortfolioValueResponse(totalAmount);
     }

@@ -23,6 +23,7 @@ using PortfolioService.Shared.Data;
 using PortfolioService.Shared.Data.Abstractions;
 using PortfolioService.Shared.Data.EntityMappings;
 using PortfolioService.Shared.Data.Repositories;
+using PortfolioService.Shared.Infrastructure;
 using PortfolioService.Shared.Options;
 using Refit;
 
@@ -70,6 +71,8 @@ public static class AddInfrastructureExtensions
                     client.DefaultRequestHeaders.Add("apikey", options.Value.Token);
                 });
 
+        //now it is singleton since not maintaining any states , but in future it can be Transient or scoped
+        builder.Services.AddSingleton<IStockService, StockService>();
         TypeAdapterConfig.GlobalSettings.RequireDestinationMemberSource = true;
         return builder;
     }
@@ -78,7 +81,6 @@ public static class AddInfrastructureExtensions
     {
         services
             .AddScoped<IPortfolioContext, PortfolioContext>()
-
             .AddScoped(typeof(IRepository<>), typeof(BaseRepository<>))
             .AddScoped<IPortfolioRepository, PortfolioRepository>()
             .AddScoped<IDataSeeder, PortfolioDataSeeder>();

@@ -19,7 +19,6 @@ public static class UseInfrastructureExtensions
     {
         using var scope = serviceProvider.CreateScope();
         var seeders = scope.ServiceProvider.GetServices<IDataSeeder>();
-        foreach (var seeder in seeders)
-            await seeder.SeedAllAsync();
+        foreach (var seeder in seeders) await seeder.SeedAllAsync();
     }
 }
