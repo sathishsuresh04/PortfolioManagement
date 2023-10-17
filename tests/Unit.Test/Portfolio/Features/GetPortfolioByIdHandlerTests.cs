@@ -33,26 +33,23 @@ public class GetPortfolioByIdHandlerTests
         var dateTime = DateTime.UtcNow;
         var stocks = new List<Stock>
                      {
-                         new() {Ticker = "TSLA", BaseCurrency = "USD", NumberOfShares = 20},
-                         new() {Ticker = "GME", BaseCurrency = "USD", NumberOfShares = 100},
-                         new() {Ticker = "KINV-B", BaseCurrency = "SEK", NumberOfShares = 50},
-                         new() {Ticker = "BBD.B", BaseCurrency = "CAD", NumberOfShares = 100},
-                         new() {Ticker = "NAS", BaseCurrency = "NOK", NumberOfShares = 20000}
+                         new() {Ticker = "TSLA", BaseCurrency = "USD", NumberOfShares = 20,},
+                         new() {Ticker = "GME", BaseCurrency = "USD", NumberOfShares = 100,},
+                         new() {Ticker = "KINV-B", BaseCurrency = "SEK", NumberOfShares = 50,},
+                         new() {Ticker = "BBD.B", BaseCurrency = "CAD", NumberOfShares = 100,},
+                         new() {Ticker = "NAS", BaseCurrency = "NOK", NumberOfShares = 20000,},
                      };
 
         var portfolio = PortfolioService.Portfolios.Models.Portfolio.Create(0);
-        foreach (var stock in stocks)
-        {
-            portfolio.AddStocks(stock);
-        }
+        foreach (var stock in stocks) portfolio.AddStocks(stock);
         var stocksDto = new List<StockDto>
-                      {
-                          new("TSLA", "USD", 20),
-                          new("GME", "USD", 100),
-                          new("KINV-B", "SEK", 50),
-                          new("BBD.B", "CAD", 100),
-                          new("NAS", "NOK", 20000)
-                      };
+                        {
+                            new("TSLA", "USD", 20),
+                            new("GME", "USD", 100),
+                            new("KINV-B", "SEK", 50),
+                            new("BBD.B", "CAD", 100),
+                            new("NAS", "NOK", 20000),
+                        };
 
         var portfolioDto = new PortfolioDto(portfolioId.ToString(), 0, dateTime, null, null, false, stocksDto);
 
@@ -94,11 +91,12 @@ public class GetPortfolioByIdHandlerTests
         // Act and Assert
         await Assert.ThrowsAsync<ArgumentNullException>(() => _handler.Handle(request, CancellationToken.None));
     }
+
     [Fact]
     public async Task Handle_WithInvalidId_ShouldThrowException()
     {
         // Arrange
-        string portfolioId = "test";
+        var portfolioId = "test";
 
         var request = new GetPortfolioById(portfolioId);
 

@@ -7,8 +7,6 @@ using Xunit;
 
 namespace Unit.Test.Portfolio.Features;
 
-
-
 public class DeletePortfolioByIdHandlerTests
 {
     private readonly DeletePortfolioByIdHandler _handler;
@@ -34,7 +32,8 @@ public class DeletePortfolioByIdHandlerTests
         await _handler.Handle(request, CancellationToken.None);
 
         // Assert
-        _portfolioRepository.Received(1).Update(Arg.Is<PortfolioService.Portfolios.Models.Portfolio>(x => x.Deleted == true));
+        _portfolioRepository.Received(1)
+            .Update(Arg.Is<PortfolioService.Portfolios.Models.Portfolio>(x => x.Deleted == true));
         await _portfolioRepository.UnitOfWork.Received(1).SaveChangesAsync(CancellationToken.None);
     }
 
@@ -67,7 +66,7 @@ public class DeletePortfolioByIdHandlerTests
     public async Task Handle_GivenInvalidId_ShouldThrowException()
     {
         // Arrange
-        string portfolioId = "test";
+        var portfolioId = "test";
 
         var request = new DeletePortfolioById(portfolioId);
 

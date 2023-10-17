@@ -10,38 +10,6 @@ public static class EndpointConventionBuilderExtensions
     ///     Specifies the response type and content type for the specified status code and adds an OpenAPI description for the
     ///     operation.
     /// </summary>
-    /// <param name="builder">The RouteHandlerBuilder instance.</param>
-    /// <param name="description">The description of the response.</param>
-    /// <param name="statusCode">The HTTP status code.</param>
-    /// <param name="responseType">The type of the response.</param>
-    /// <param name="contentType">The content type of the response.</param>
-    /// <param name="additionalContentTypes">Additional content types supported by the response.</param>
-    /// <returns>The updated RouteHandlerBuilder instance.</returns>
-    public static RouteHandlerBuilder Produces(
-        this RouteHandlerBuilder builder,
-        string description,
-        int statusCode,
-        Type? responseType = null,
-        string? contentType = null,
-        params string[] additionalContentTypes
-    )
-    {
-        builder.WithOpenApi(
-            operation =>
-            {
-                operation.Responses[statusCode.ToString(CultureInfo.InvariantCulture)].Description = description;
-                return operation;
-            });
-
-        builder.Produces(statusCode, responseType, contentType, additionalContentTypes);
-
-        return builder;
-    }
-
-    /// <summary>
-    ///     Specifies the response type and content type for the specified status code and adds an OpenAPI description for the
-    ///     operation.
-    /// </summary>
     /// <typeparam name="TResponse">The type of the response.</typeparam>
     /// <param name="builder">The RouteHandlerBuilder instance.</param>
     /// <param name="description">The description of the response.</param>

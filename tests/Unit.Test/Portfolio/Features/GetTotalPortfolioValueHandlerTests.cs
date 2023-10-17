@@ -17,12 +17,12 @@ namespace Unit.Test.Portfolio.Features;
 
 public class GetTotalPortfolioValueHandlerTests
 {
-    private readonly GetTotalPortfolioValueHandler _handler;
-    private readonly IPortfolioRepository _portfolioRepository;
-    private readonly ExchangeRateService _exchangeRateService;
-    private readonly IStockService _stockService;
-    private readonly IEasyCachingProvider _mockedCachingProvider;
     private const string CacheKey = "exchange_rate_data";
+    private readonly ExchangeRateService _exchangeRateService;
+    private readonly GetTotalPortfolioValueHandler _handler;
+    private readonly IEasyCachingProvider _mockedCachingProvider;
+    private readonly IPortfolioRepository _portfolioRepository;
+    private readonly IStockService _stockService;
 
     public GetTotalPortfolioValueHandlerTests()
     {
@@ -36,7 +36,10 @@ public class GetTotalPortfolioValueHandlerTests
         var mockedExchangeRateApiOptions = new ExchangeRateApiOptions();
         var optionsWrapper = Substitute.For<IOptions<ExchangeRateApiOptions>>();
         optionsWrapper.Value.Returns(mockedExchangeRateApiOptions);
-        _exchangeRateService = new ExchangeRateService(mockedCachingProviderFactory, exchangeRateApiClient, optionsWrapper);
+        _exchangeRateService = new ExchangeRateService(
+            mockedCachingProviderFactory,
+            exchangeRateApiClient,
+            optionsWrapper);
         _handler = new GetTotalPortfolioValueHandler(_portfolioRepository, _stockService, _exchangeRateService);
     }
 
@@ -46,19 +49,13 @@ public class GetTotalPortfolioValueHandlerTests
         // Arrange
         var portfolioId = new ObjectId("61377659d24fd78398a5a54a");
         var portfolio = PortfolioService.Portfolios.Models.Portfolio.Create(0);
-        var stocks = new List<Stock>
-                     {
-                         new() {Ticker = "TSLA", BaseCurrency = "USD", NumberOfShares = 10},
-                     };
+        var stocks = new List<Stock> {new() {Ticker = "TSLA", BaseCurrency = "USD", NumberOfShares = 10,},};
 
-        foreach (var stock in stocks)
-        {
-            portfolio.AddStocks(stock);
-        }
+        foreach (var stock in stocks) portfolio.AddStocks(stock);
 
         _portfolioRepository.GetByIdAsync(portfolioId).Returns(portfolio);
 
-        var data = new Quote { quotes = new Dictionary<string, decimal> { { "USDUSD", 1m } } };
+        var data = new Quote {quotes = new Dictionary<string, decimal> {{"USDUSD", 1m},},};
 
         // Mocking the GetAsync method to return our quote data
         var cacheValue = new CacheValue<Quote>(data, true);
@@ -112,7 +109,7 @@ public class GetTotalPortfolioValueHandlerTests
     public async Task Handle_GivenInvalidId_ShouldThrowException()
     {
         // Arrange
-        string portfolioId = "test";
+        var portfolioId = "test";
 
         var request = new GetTotalPortfolioValue(portfolioId);
 
