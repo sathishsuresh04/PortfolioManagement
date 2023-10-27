@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver"/>
+    <PackageReference Include="Mongo2Go"/>
+    <PackageReference Include="Refit"/>
+    <PackageReference Include="Refit.HttpClientFactory"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks\BuildingBlocks.csproj"/>
+  </ItemGroup>
+</Project>

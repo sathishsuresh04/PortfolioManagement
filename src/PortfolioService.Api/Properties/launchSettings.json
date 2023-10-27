@@ -1,0 +1,15 @@
+﻿{
+  "$schema": "https://json.schemaportfolioservice.org/launchsettings.json",
+  "profiles": {
+    "Portfolio.Service": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:7096;http://localhost:7095",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

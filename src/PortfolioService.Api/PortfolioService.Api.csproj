@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <UserSecretsId>352a8bd2-c7aa-4f0d-8f8c-94e3d7c327fb</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PortfolioService\PortfolioService.csproj"/>
+  </ItemGroup>
+</Project>
