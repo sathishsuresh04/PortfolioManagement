@@ -19,7 +19,7 @@ public class DateOnlyConverter : JsonConverter<DateOnly>
         JsonSerializer serializer
     )
     {
-        return DateOnly.ParseExact((string)reader.Value, Format, CultureInfo.InvariantCulture);
+        return DateOnly.ParseExact((string)reader.Value!, Format, CultureInfo.InvariantCulture);
     }
 
     /// <inheritdoc />

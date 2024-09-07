@@ -56,7 +56,7 @@ public class DefaultSerializer : ISerializer
     /// <summary>
     ///     Custom contract resolver that allows serialization of private setters.
     /// </summary>
-    private class ContractResolverWithPrivate : CamelCasePropertyNamesContractResolver
+    private sealed class ContractResolverWithPrivate : CamelCasePropertyNamesContractResolver
     {
         // Reference: http://danielwertheim.se/json-net-private-setters/
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)

@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace BuildingBlocks.Logging;
 
 /// <summary>
 ///     Represents the options for Serilog configuration.
 /// </summary>
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 public sealed class SerilogOptions
 {
     /// <summary>
@@ -19,12 +22,12 @@ public sealed class SerilogOptions
     /// <summary>
     ///     Gets or sets the name of the service.
     /// </summary>
-    public string ServiceName { get; init; }
+    public string ServiceName { get; init; } = null!;
 
     /// <summary>
     ///     Gets or sets the options for console logging.
     /// </summary>
-    public ConsoleLogOptions ConsoleLogOptions { get; init; }
+    public ConsoleLogOptions ConsoleLogOptions { get; init; } = null!;
 
     /// <summary>
     ///     Gets or sets the log path for file logging.
@@ -39,7 +42,7 @@ public sealed class SerilogOptions
     /// <summary>
     ///     Gets or sets the options for logging to Azure Log Analytics.
     /// </summary>
-    public LogAnalyticsLogOptions LogAnalyticsLogOptions { get; init; }
+    public LogAnalyticsLogOptions LogAnalyticsLogOptions { get; init; } = null!;
 
     /// <summary>
     ///     Gets or sets the URL for Elasticsearch logging.
@@ -65,6 +68,7 @@ public sealed class SerilogOptions
 /// <summary>
 ///     Represents the options for console logging.
 /// </summary>
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 public record ConsoleLogOptions
 {
     /// <summary>
@@ -81,6 +85,7 @@ public record ConsoleLogOptions
 /// <summary>
 ///     Represents the options for logging to Azure Log Analytics.
 /// </summary>
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 public record LogAnalyticsLogOptions
 {
     /// <summary>
