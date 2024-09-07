@@ -10,7 +10,7 @@
 
 **Database:**
 - MongoDB was kept as the primary database for data persistence, leveraging its document-oriented format and scalability advantages.
-- 
+  
 **Execution:** 
 - To run the solution, update the following in your configuration file(appsettings.json):
      "MongoDbOptions": {"ConnectionString": ""}
@@ -26,7 +26,7 @@
 - Azure Cosmos MongoDB
 - Structured Logging with Serilog
 - Unit Testing with NSubstitute
-- .Net 7
+- .Net 8
 - Centralized package management and build managment
 
 **Third-Party Libraries:**
@@ -38,6 +38,6 @@
 - Serilog
 - Humanizer
 - Bogus
-- EasyCaching.Core**
+- EasyCaching.Core
 
 Note: All changes have adhered to best coding practices, and third-party open source libraries were utilized for task efficiency.
