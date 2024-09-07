@@ -26,7 +26,7 @@ public static class Extensions
         params Assembly[] assemblies
     )
     {
-        var scanAssemblies = assemblies.Any() ?
+        var scanAssemblies = assemblies.Length != 0 ?
                                  assemblies :
                                  new[]
                                  {

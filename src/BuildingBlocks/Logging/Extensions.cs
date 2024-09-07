@@ -142,7 +142,13 @@ public static class RegistrationExtensions
 
     private static void WriteToConsole(LoggerConfiguration logger, SerilogOptions serilogOptions)
     {
-        if (!serilogOptions.ConsoleLogOptions.WriteToConsole) return;
+        if (serilogOptions.ConsoleLogOptions is
+            {
+                WriteToConsole: false
+            })
+        {
+            return;
+        }
 
         if (serilogOptions.ConsoleLogOptions.UseElasticsearchJsonFormatter)
             logger.WriteTo.Async(writeTo => writeTo.Console(new ExceptionAsObjectJsonFormatter(renderMessage: true)));

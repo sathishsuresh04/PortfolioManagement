@@ -14,16 +14,17 @@ public abstract class Entity : IEquatable<Entity>
     {
     }
 
+    // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
     public ObjectId Id { get; set; }
 
-    public bool Equals(Entity other)
+    public bool Equals(Entity? other)
     {
         if (other is null) return false;
 
         return ReferenceEquals(this, other) || Id == other.Id;
     }
 
-    public static bool operator ==(Entity a, Entity b)
+    public static bool operator ==(Entity? a, Entity? b)
     {
         if (a is null && b is null) return true;
 
@@ -37,7 +38,7 @@ public abstract class Entity : IEquatable<Entity>
         return !(a == b);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj is null) return false;
 
@@ -54,6 +55,7 @@ public abstract class Entity : IEquatable<Entity>
 
     public override int GetHashCode()
     {
+        // ReSharper disable once NonReadonlyMemberInGetHashCode
         return Id.GetHashCode() * 41;
     }
 }
